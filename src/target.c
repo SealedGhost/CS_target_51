@@ -8,6 +8,7 @@
 
 void TGT_Fall()
 {
+	  IO_LEDv12  = 1;
 	  if(!IS_AT_HPOS)   
 			{
 				  MOTOR_ON;
@@ -24,13 +25,15 @@ void TGT_Stand()
 				  MOTOR_ON;
 						while(!IS_AT_VPOS);
 						MOTOR_OFF;
-		 }		
+		 }	
+   IO_LEDv12  = 0;		
 }
 
 
 void TGT_Revive()
 {
-
+  IO_LEDv12  = 1;  
+	
 		if(!IS_AT_HPOS)
 			  MOTOR_ON;
 			while(!IS_AT_HPOS);
@@ -45,4 +48,6 @@ void TGT_Revive()
 			while(!IS_AT_VPOS);
 
 			MOTOR_OFF;
+			
+			IO_LEDv12  = 0;
 }

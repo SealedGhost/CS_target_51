@@ -45,24 +45,27 @@ GAME_STT  GameStt   = GSTT_Stop;
 
 void main()
 {
-	 IO_LEDv5  = 0  ;
+	 IO_LEDv5  = 0;
+	 IO_LEDv12 = 0;
 	
+	 TIM0_Init(); 	
 		UART1_Init();
 		UART1_Cmd(ENABLE);
-//  printf("Uart OK\n");	
-	
-	 TIM0_Init();  
 	 
 	 TGT_Revive(); 
 	
   while(1)
   {			
 				if(UARTMsgFlags&UART_POST)
-				{
+				{				 					
 					 UARTMsgFlags  &= (~UART_POST);
 							
 					 if(UART_Buf[INDEX_ID] == 0x00  ||  UART_Buf[INDEX_ID] == ID)
 						{
+						  	IO_LEDv12  = 1;
+							  DelayTicks(10);
+							  IO_LEDv12  = 0;
+							
 							  if(UART_Buf[INX_MOD]<=GMODE_Cmpt)
 									{
 										  GameMode  = UART_Buf[INX_MOD];
@@ -112,7 +115,7 @@ void main()
 																	break;
 									}
 						}
-				} /// UARTMsg end. 
+				}  /// UARTMsg end. 
 				
 				if(GameMode>=GMODE_Prct  &&  GameMode<=GMODE_Cmpt)
 				{
@@ -125,8 +128,6 @@ void main()
 												IO_LEDv5  = 1;
 												while(!SensorState);
 												
-
-												IO_LEDv12  = 1;
 										  if(GameMode == GMODE_Cmpt  &&  GameStt != GSTT_Ack)
 												{
 													  TGT_Fall();
@@ -136,10 +137,10 @@ void main()
 												{
 													   TGT_Revive();
 												}
-												IO_LEDv12  = 0;
 												IO_LEDv5  = 0;
 												
-												ReturnRes();
+												if(GameMode != GMODE_Prct)
+												   ReturnRes();
 												TIM_UpdateTimer(TMSG_TIMER, TimeOutVal * 20);
 									}
 							}
