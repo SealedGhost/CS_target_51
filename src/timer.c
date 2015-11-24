@@ -4,7 +4,6 @@
 uint8_t TMsgFlags  = 0;
 
 volatile uint16_t  Cnt50ms  = 0;
-char               isTimeOut = 0;
 
 static TIM_MSG TMsgQueue[TMSG_SIZE]	= 0;
 
@@ -22,6 +21,9 @@ void TIM0_Init(void)		//50∫¡√Î@11.0592MHz
 	 EA    = 1;
 		TR0   = 1;
 }
+
+
+
 
 Bool TIM_UpdateTimer( uint8_t msg_id, uint16_t ticks )
 {
@@ -104,3 +106,5 @@ void Timer0_IRQ() interrupt 1
 			}
 			TR0  = 1;
 }
+
+

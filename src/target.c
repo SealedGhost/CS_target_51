@@ -30,15 +30,15 @@ void TGT_Stand()
 
 void TGT_Revive()
 {
+
 		if(!IS_AT_HPOS)
 			  MOTOR_ON;
-
 			while(!IS_AT_HPOS);
 
 			MOTOR_OFF;
 
 			DelayTicks(50);
-
+   
 			if(!IS_AT_VPOS)
 		   MOTOR_ON;
 
