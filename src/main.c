@@ -40,6 +40,7 @@ uint8_t TimeOutVal  = 0;
 
 GAME_MODE GameMode  = GMODE_Init;
 GAME_STT  GameStt   = GSTT_Stop;
+GAME_STT  OldStt    = GSTT_Stop;
 
 
 
@@ -89,10 +90,14 @@ void main()
 												     TGT_Fall();
 												     break;
 												case GSTT_Ack:
-												     TimeOutVal  = 0;
-																	TIM_DeleteTimer(TMSG_TIMER);
-																	/// Target fall.
-												     TGT_Fall();
+													    if(OldStt != GSTT_Ack)
+																	{
+																			TimeOutVal  = 0;
+																			TIM_DeleteTimer(TMSG_TIMER);
+																			/// Target fall.
+																			TGT_Fall();																		
+																	}
+																	
 																	/// Reply.
 												     ACK_Reply();
 												     break;
@@ -114,6 +119,8 @@ void main()
 																	   TIM_CreateTimer(TMSG_TIMER, TimeOutVal * 20);
 																	break;
 									}
+									
+									OldStt  = GameStt;
 						}
 				}  /// UARTMsg end. 
 				
@@ -128,7 +135,7 @@ void main()
 												IO_LEDv5  = 1;
 												while(!SensorState);
 												
-										  if(GameMode == GMODE_Cmpt  &&  GameStt != GSTT_Ack)
+										  if(GameMode == GMODE_Cmpt)
 												{
 													  TGT_Fall();
 													  GameStt  = GSTT_Stop;

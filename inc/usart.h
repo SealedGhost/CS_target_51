@@ -11,19 +11,29 @@
 #include "types.h"
 
 
+#define UART_POST  0x01
+
+#define RXBUF_SIZE 20
 
 
-#define RXBUF_SIZE 10
-
-
-#define FRM_DATA_SIZE  6	///一帧数据中的要用到的数据的大小
-#define INDEX_ADDR 0
-#define INDEX_CMD  1
-#define INDEX_PARA 2
+#define FRM_DATA_SIZE  10	///一帧数据中的要用到的数据的大小
+#define INDEX_ID 2
+#define INDEX_MODE  3
+#define INDEX_CMD 2
 #define INDEX_SUM  5
+
+#define INX_ID  2
+#define INX_MOD 3
+#define INX_STT 4
+#define INX_VAL 5
+#define INX_RSV 6
+#define INX_SUM 7
+
 
 enum _UART_STATES {UARTState_Init = 0, UARTState_Nose, UARTState_Nip, UARTState_Ingested};
 typedef enum _UART_STATES  UART_STATES;
+
+extern uint8_t UARTMsgFlags;
 
 
 void UART1_Init (void);

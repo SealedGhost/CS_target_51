@@ -4,8 +4,8 @@
 #include <STC12C5A60S2.h>
 
 
-sbit IO_VSignal  = P3^2;
-sbit IO_HSignal  = P3^3;
+sbit IO_VSignal  = P3^3;
+sbit IO_HSignal  = P3^2;
 
 sbit IO_Motor    = P1^1;
 

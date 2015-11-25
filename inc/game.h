@@ -1,14 +1,22 @@
 #ifndef _GAME_H
 #define _GAME_H
 
-enum _GAME_MODE { GMMode_Init = 0, 
-                  GMMode_Prct, 
-				  GMMode_Shot, 
-				  GMMode_Cmpt,
-				  GMMode_Ack, 
-				  GMMode_Pause, 
-				  GMMode_Resume};
-typedef enum _GAME_MODE GMMODES;
+typedef enum {   
+															GMODE_Init = 0, 
+															GMODE_Prct, 
+															GMODE_Shot, 
+															GMODE_Cmpt 
+													} GAME_MODE;
+
+
+typedef enum {
+               GSTT_Stop  = 0,
+	              GSTT_Ack,
+	              GSTT_Pause,
+	              GSTT_Resume,  
+	              GSTT_Start
+             } GAME_STT;
+
 
 #define GAME_MODE_PRCT  0x07
 #define GAME_MODE_SHOT  0x08

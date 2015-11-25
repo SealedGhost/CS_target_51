@@ -86,17 +86,6 @@ void UART1_SendByte(uint8_t dat)
 }
 
 
-static void UART1_ResetIdle()
-{
-	 TR1  = 0;
-	 TH0  = 0x4C;
-	 TL0  = 0;
-	 IdleCnt  = 0;
-	 TR1  = 1;
-}
-
-
-
 void UART1_IRQ() interrupt 4
 {
 	 if(RI)
